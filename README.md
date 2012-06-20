@@ -73,6 +73,14 @@ we're focusing on making beautiful controllers presently.
 We're also careful to make these features modular, so you can mix them
 into your existing controllers as needed.
 
+CoreData ActiveRecord-ness
+----------
+Nitron strives to bring ActiveRecord based features to CoreData, including:
+
+	Task.count
+	Task.where("title contains[cd] ?", "some title")
+	Task.where("title contains[cd] ?", "some title").order("created_at").count
+
 Tutorial
 ----------
 https://github.com/mattgreen/nitron/wiki/Tutorial

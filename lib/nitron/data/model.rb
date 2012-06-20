@@ -4,6 +4,10 @@ module Nitron
       def all
         Data::Relation.alloc.initWithClass(self)
       end
+      
+      def count
+        all.count
+      end
 
       def create(attributes={})
         model = new(attributes)

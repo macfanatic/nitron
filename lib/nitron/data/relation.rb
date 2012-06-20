@@ -12,6 +12,11 @@ module Data
     def all
       self
     end
+    
+    def count
+      self.resultType = NSCountResultType
+      to_a[0]
+    end
 
     def first
       setFetchLimit(1)
