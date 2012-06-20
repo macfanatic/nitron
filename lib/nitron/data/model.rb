@@ -8,6 +8,14 @@ module Nitron
       def count
         all.count
       end
+      
+      def pluck(column)
+        all.pluck(column)
+      end
+      
+      def distinct
+        all.distinct
+      end
 
       def create(attributes={})
         model = new(attributes)

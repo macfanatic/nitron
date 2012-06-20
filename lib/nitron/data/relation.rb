@@ -18,6 +18,21 @@ module Data
       to_a[0]
     end
 
+    def pluck(column)
+      self.resultType = NSDictionaryResultType
+      
+      attribute_description = entity.attributesByName[column]
+      raise ArgumentError, "#{column} not a valid column name" if attribute_description.nil?
+      
+      self.propertiesToFetch = [attribute_description]
+      to_a.collect { |r| r[column] }
+    end
+    
+    def distinct
+      self.returnsDistinctResults = true
+      self
+    end
+
     def first
       setFetchLimit(1)
 
