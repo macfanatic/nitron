@@ -2,7 +2,7 @@ module Nitron
   class Model < NSManagedObject
     class << self
       def all
-        Data::Relation.alloc.initWithClass(self)
+        relation.to_a
       end
       
       def count
