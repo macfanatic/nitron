@@ -10,11 +10,11 @@ module Nitron
       end
       
       def pluck(column)
-        all.pluck(column)
+        relation.pluck(column)
       end
       
       def distinct
-        all.distinct
+        relation.distinct
       end
 
       def create(attributes={})
