@@ -10,7 +10,7 @@ module Data
     end
 
     def all
-      self
+      to_a
     end
     
     def count
