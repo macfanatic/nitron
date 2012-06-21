@@ -97,7 +97,7 @@ module Nitron
       end
 
       def respond_to?(method)
-        if method.start_with?("find_by_")
+        if method.start_with?("find_by_") || method.start_with?("find_all_by_")
           true
         else
           super
