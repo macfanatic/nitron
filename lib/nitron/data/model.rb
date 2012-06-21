@@ -46,8 +46,21 @@ module Nitron
         end
       end
 
+      # Provide a :context option (true|false|NSManagedObjectContext instance) to assign to a context upon insertion, or false to insert into default context during save
       def new(attributes={})
-        self.alloc.initWithEntity(entityDescription, insertIntoManagedObjectContext:nil).tap do |model|
+        
+        # Determine if you're wanting to assign to the default context, a provided context, or no context (default)
+        context = nil
+        assign_to_context = attributes.delete(:context) || false
+        if [TrueClass, FalseClass].include?(assign_to_context.class)
+          if assign_to_context
+            context = UIApplication.sharedApplication.delegate.managedObjectContext
+          end
+        elsif assign_to_context.is_a?(NSManagedObjectContext)
+          context = assign_to_context
+        end
+        
+        self.alloc.initWithEntity(entityDescription, insertIntoManagedObjectContext:context).tap do |model|
           attributes.each do |keyPath, value|
             model.setValue(value, forKey:keyPath)
           end
