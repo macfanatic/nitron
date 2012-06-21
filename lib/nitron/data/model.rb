@@ -42,6 +42,10 @@ module Nitron
       def entityDescription
         @_metadata ||= UIApplication.sharedApplication.delegate.managedObjectModel.entitiesByName[name]
       end
+      
+      def except(query_part)
+        relation.except(query_part)
+      end
 
       def find(object_id)
         unless entity = find_by_id(object_id)

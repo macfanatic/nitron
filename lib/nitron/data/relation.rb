@@ -32,6 +32,20 @@ module Data
       self.returnsDistinctResults = true
       self
     end
+    
+    def except(query_part)      
+      case query_part.to_sym
+      when :where
+        self.predicate = nil
+      when :order
+        self.sortDescriptors = nil
+      when :limit
+        self.fetchLimit = 0
+      else
+        raise ArgumentError, "unsupport query part '#{query_part}'"
+      end
+      self
+    end
 
     def first
       setFetchLimit(1)
