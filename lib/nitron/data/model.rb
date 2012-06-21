@@ -32,6 +32,10 @@ module Nitron
 
         entity
       end
+      
+      def includes(*relatives)
+        relation.includes(*relatives)
+      end
 
       def first
         relation.first

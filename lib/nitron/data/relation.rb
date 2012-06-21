@@ -18,6 +18,19 @@ module Data
 
       to_a[0]
     end
+    
+    def includes(*relatives)
+      
+      raise ArgumentError, "Must provide at least one relationship to prefetch." if relatives.empty?
+      
+      relatives = relatives.collect(&:to_s)
+      supported_relationship_names = entity.relationshipsByName.keys
+      unsupported_keys = relatives - supported_relationship_names
+      
+      raise ArgumentError, "Following relationships are not defined for '#{entity.name}': #{unsupported_keys.join(', ')}" unless unsupported_keys.empty?
+      self.relationshipKeyPathsForPrefetching = relatives
+      self
+    end
 
     def inspect
       to_a
