@@ -54,6 +54,14 @@ module Nitron
       def first
         relation.first
       end
+      
+      def limit(l)
+        relation.limit(l)
+      end
+      
+      def offset(o)
+        relation.offset(o)
+      end
 
       def method_missing(method, *args, &block)
         if method.start_with?("find_by_")

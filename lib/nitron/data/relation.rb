@@ -42,6 +42,20 @@ module Data
     def inspect
       to_a
     end
+    
+    def limit(l)
+      l = l.to_i
+      raise ArgumentError, "limit '#{l}' cannot be less than zero. Use zero for no limit." if l < 0
+      self.fetchLimit = l
+      self
+    end
+    
+    def offset(o)
+      o = o.to_i
+      raise ArgumentError, "offset '#{o}' cannot be less than zero." if o < 0
+      self.fetchOffset = o
+      self
+    end
 
     def order(column, opts={})
       descriptors = sortDescriptors || []
