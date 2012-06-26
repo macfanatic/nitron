@@ -120,6 +120,35 @@ Task.new # creates a new Task object, outside of a NSManagedObjectContext, optio
 task = Task.new
 task.save # will save, true if successful, false if failed
 task.save! # will throw Nitron::RecordNotSaved if failed, contains errors object for validation messages
+
+# Callbacks are supported, including if/unless support with Symbol or Proc objects
+class Task < Nitron::Model
+	
+	# Can provide proc or symbol to be executed on the model instance at runtime, to any of the callback methods
+	before_save :method, if: :method
+	before_save :method, unless: :method
+	before_save :method, if: proc { true }
+
+	# Can provide a block instead of a method symbol to any of the callbacks
+	before_save do
+		puts "here"
+	end
+	
+	# Can combine the options with the block syntax
+	before_save(if: :should_send_customer_email?) do
+		CustomerMailer.welcome_email(self).deliver!
+	end
+
+	# Fully supports the following callbacks
+	before_save
+	after_save
+	before_create
+	after_create
+	before_destroy
+	after_destroy
+	after_initialize	# any intialization code should go here, as NSManagedObject#awakeFromInsert is called too late in the lifecycle to set default values in a newly instantiated model instance
+	
+end
 ```
 
 Tutorial

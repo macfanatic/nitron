@@ -1,6 +1,7 @@
 module Nitron
   class Model < NSManagedObject
     
+    include Data::Model::Callbacks
     include Data::Model::CoreData
     include Data::Model::FinderMethods
     include Data::Model::Persistence
