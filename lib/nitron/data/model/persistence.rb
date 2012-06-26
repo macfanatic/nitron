@@ -29,12 +29,15 @@ module Nitron
               attributes.each do |keyPath, value|
                 model.setValue(value, forKey:keyPath)
               end
+              model.send(:run_callbacks, :after_initialize)
             end
           end
         
         end
       
         def destroy
+          
+          run_callbacks :before_destroy
         
           if context = managedObjectContext
             context.deleteObject(self)
@@ -43,6 +46,7 @@ module Nitron
           end
         
           @destroyed = true
+          run_callbacks :after_destroy
           freeze
         end
       
@@ -71,13 +75,24 @@ module Nitron
           unless context = managedObjectContext
             context = UIApplication.sharedApplication.delegate.managedObjectContext
             context.insertObject(self)
+            run_callbacks :before_create
           end
+          
+          run_callbacks :before_save
 
           error = Pointer.new(:object)
           unless context.save(error)
             managedObjectContext.deleteObject(self)
             raise Nitron::RecordNotSaved, self and return false
           end
+          
+          if new_record?
+            @new_record = false
+            run_callbacks :after_create
+          end
+          
+          run_callbacks :after_save
+          
           true
         end
       
