@@ -12,7 +12,7 @@ module Nitron
           def create(attributes={})
             begin
               model = create!(attributes)
-            rescue Nitron::RecordInvalid
+            rescue Nitron::RecordNotSaved
             end
             model
           end
