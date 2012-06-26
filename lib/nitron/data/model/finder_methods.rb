@@ -61,6 +61,10 @@ module Nitron
           def pluck(column)
             relation.pluck(column)
           end
+          
+          def reorder(*args)
+            relation.except(:order).order(*args)
+          end
         
           def respond_to?(method)
             if method.start_with?("find_by_") || method.start_with?("find_all_by_")
