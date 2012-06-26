@@ -69,12 +69,12 @@ module Nitron
         end
       
         def where(format, *args)
-          predicate = NSPredicate.predicateWithFormat(format.gsub("?", "%@"), argumentArray:args)
+          new_predicate = NSPredicate.predicateWithFormat(format.gsub("?", "%@"), argumentArray:args)
 
           if self.predicate
-            self.predicate = NSCompoundPredicate.andPredicateWithSubpredicates([predicate])
+            self.predicate = NSCompoundPredicate.andPredicateWithSubpredicates([predicate, new_predicate])
           else
-            self.predicate = predicate
+            self.predicate = new_predicate
           end
 
           self
