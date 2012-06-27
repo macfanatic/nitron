@@ -47,7 +47,7 @@ module Nitron
         end
             
         def order(column, opts={})
-          descriptors = sortDescriptors.mutableCopy || []
+          descriptors = sortDescriptors.mutableCopy rescue []
           descriptors << NSSortDescriptor.sortDescriptorWithKey(column.to_s, ascending:opts.fetch(:ascending, true))
           self.sortDescriptors = descriptors
           self
