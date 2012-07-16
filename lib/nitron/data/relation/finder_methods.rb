@@ -31,6 +31,11 @@ module Nitron
           self.fetchLimit = 1
           to_a[0]
         end
+        
+        def includes_pending(b=true)
+          self.includesPendingChanges = b
+          self
+        end
       
         def limit(l)
           l = l.to_i
