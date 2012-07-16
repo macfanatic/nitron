@@ -16,6 +16,10 @@ module Nitron
           def count
             relation.count
           end
+          
+          def destroy_all
+            all.map &:destroy
+          end
         
           def except(query_part)
             relation.except(query_part)

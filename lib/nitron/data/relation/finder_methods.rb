@@ -12,6 +12,10 @@ module Nitron
           self.resultType = NSCountResultType
           to_a[0]
         end
+        
+        def destroy_all
+          all.map &:destroy
+        end
       
         def except(query_part)
           case query_part.to_sym
