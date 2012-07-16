@@ -40,6 +40,7 @@ module Nitron
           
           def includes_pending(b=true)
             relation.includes_pending(b)
+            relation
           end
         
           def limit(l)
