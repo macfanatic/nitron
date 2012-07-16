@@ -33,6 +33,10 @@ module Nitron
           def first!
             first or raise Nitron::RecordNotFound
           end
+          
+          def includes_pending(b=true)
+            relation.includes_pending(b)
+          end
         
           def limit(l)
             relation.limit(l)
@@ -85,7 +89,7 @@ module Nitron
         private
         
           def relation
-            Relation.alloc.initWithClass(self)
+            Relation.alloc.initWithClass(self).includes_pending
           end
         
         end 
