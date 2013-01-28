@@ -1,5 +1,6 @@
-class AppDelegate
+module Nitron::AppDelegateStoryboard
   def application(application, didFinishLaunchingWithOptions:launchOptions)
+    super
     @window = UIWindow.alloc.initWithFrame(UIScreen.mainScreen.bounds)
 
     if storyboard
@@ -16,4 +17,3 @@ class AppDelegate
     @storyboard ||= UIStoryboard.storyboardWithName("MainStoryboard", bundle:nil)
   end
 end
-

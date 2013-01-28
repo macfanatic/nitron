@@ -1,4 +1,4 @@
-class AppDelegate
+module Nitron::AppDelegateCoreData
   def managedObjectContext
     @managedObjectContext ||= begin
       applicationName = NSBundle.mainBundle.infoDictionary.objectForKey("CFBundleName")
@@ -40,4 +40,3 @@ class AppDelegate
     @coordinator ||= NSPersistentStoreCoordinator.alloc.initWithManagedObjectModel(managedObjectModel)
   end
 end
-

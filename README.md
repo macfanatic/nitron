@@ -29,6 +29,22 @@ Then, update your bundle:
 
 `bundle`
 
+To use CoreData features, you can include a module in your application delegate:
+
+```ruby
+class MyAppDelegate
+  include Nitron::AppDelegateCoreData
+end
+```
+
+To use a storyboard, you can include a module in your application delegate:
+
+```ruby
+class MyAppDelegate
+  include Nitron::AppDelegateStoryboard
+end
+```
+
 And build your application:
 
 `rake`
