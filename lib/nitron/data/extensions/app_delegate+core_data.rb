@@ -7,7 +7,7 @@ module Nitron::AppDelegateCoreData
       storeURL = documentsDirectory.URLByAppendingPathComponent("#{applicationName}.sqlite")
 
       error_ptr = Pointer.new(:object)
-      unless persistentStoreCoordinator.addPersistentStoreWithType(NSSQLiteStoreType, configuration:nil, URL:storeURL, options:nil, error:error_ptr)
+      unless persistentStoreCoordinator.addPersistentStoreWithType(NSSQLiteStoreType, configuration:nil, URL:storeURL, options:persistent_store_options, error:error_ptr)
         raise "Can't add persistent SQLite store: #{error_ptr[0].description}"
       end
 
@@ -38,5 +38,9 @@ module Nitron::AppDelegateCoreData
 
   def persistentStoreCoordinator
     @coordinator ||= NSPersistentStoreCoordinator.alloc.initWithManagedObjectModel(managedObjectModel)
+  end
+
+  def persistent_store_options
+    nil
   end
 end
